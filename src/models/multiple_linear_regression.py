@@ -1,7 +1,7 @@
 import math
 import numpy as np
 
-def m_computer_cost(X, y, w, b):
+def compute_cost(X, y, w, b):
     m = X.shape[0]
     cost = 0
 
@@ -11,10 +11,10 @@ def m_computer_cost(X, y, w, b):
     total_cost = 1/(2*m) * cost
     return total_cost
 
-def m_compute_gradient(X, y, w, b):
+def compute_gradient(X, y, w, b):
     #number of examples, number of features
     m, n = X.shape
-    dj_dw = np.zeros((m,))
+    dj_dw = np.zeros((n,))
     dj_db = 0
 
     for i in range(m):
@@ -26,7 +26,7 @@ def m_compute_gradient(X, y, w, b):
     final_dj_db = 1/m * dj_db
     return final_dj_dw, final_dj_db
 
-def m_gradient_descent(X, y, w_init, b_init, cost_function, gradient_function, alpha, num_iters):
+def gradient_descent(X, y, w_init, b_init, cost_function, gradient_function, alpha, num_iters):
     w = w_init
     b = b_init
     cost_history = []
@@ -37,3 +37,4 @@ def m_gradient_descent(X, y, w_init, b_init, cost_function, gradient_function, a
         if i % math.ceil(num_iters/10) == 0:
             cost_history.append(cost_function(X, y, w, b))
             print(f"Iteration {i:4}: Cost = {cost_history[-1]:0.3e}")
+    return w, b, cost_history
