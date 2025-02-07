@@ -5,5 +5,4 @@ A python implementation of linear regression using gradient descent optimization
 ## Features
 - Z-score normalization
 - Support for multiple features
-- Cost function visualization
 - Learning rate adjustment
