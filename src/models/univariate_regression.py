@@ -1,24 +1,24 @@
 import math
 
 def compute_cost(x, y, w, b):
-    n = x.shape[0]
+    m = x.shape[0]
     cost = 0
-    for i in range(n):
+    for i in range(m):
         f_w = w * x[i] + b
         cost += (f_w - y[i]) ** 2
-    total_cost = 1/(2*n) * cost
+    total_cost = 1/(2*m) * cost
     return total_cost
 
 def compute_gradient(x, y, w, b):
-    n = x.shape[0]
+    m = x.shape[0]
     dj_dw = 0
     dj_db = 0
-    for i in range(n):
+    for i in range(m):
         f_w = w * x[i] + b
         dj_dw += (f_w - y[i]) * x[i]
         dj_db += (f_w - y[i])
-    final_dj_dw = 1/n * dj_dw
-    final_dj_db = 1/n * dj_db
+    final_dj_dw = 1/m * dj_dw
+    final_dj_db = 1/m * dj_db
     return final_dj_dw, final_dj_db
 
 def gradient_descent(x, y, w_init, b_init, alpha, num_iters, cost_function, gradient_function):
@@ -31,9 +31,8 @@ def gradient_descent(x, y, w_init, b_init, alpha, num_iters, cost_function, grad
         w = w - alpha * dj_dw
         b = b - alpha * dj_db
         if i % math.ceil(num_iters/10) == 0:
-            cost = cost_function(x, y, w, b)
             parameter_history.append((w, b))
-            cost_history.append(cost)
+            cost_history.append(cost_function(x, y, w, b))
             print(f"Iteration {i:4}: Cost = {cost_history[-1]:0.3e}",
                   f"dj_dw: {dj_dw:0.3e}, dj_db: {dj_db:0.3e}",
                   f"w: {w:0.3e}, b: {b:0.3e}")
