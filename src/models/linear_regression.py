@@ -27,16 +27,16 @@ def gradient_descent(x, y, w_init, b_init, alpha, num_iters, cost_function, grad
     parameter_history = []
     cost_history = []
     for i in range(num_iters):
-        dj_dw , dj_db = gradient_function(x, y, w_init, b_init)
+        dj_dw , dj_db = gradient_function(x, y, w, b)
         w = w - alpha * dj_dw
         b = b - alpha * dj_db
         if i % math.ceil(num_iters/10) == 0:
-            cost = cost_function(x, y, w_init, b_init)
-            parameter_history.append((w_init, b_init))
+            cost = cost_function(x, y, w, b)
+            parameter_history.append((w, b))
             cost_history.append(cost)
             print(f"Iteration {i:4}: Cost = {cost_history[-1]:0.3e}",
                   f"dj_dw: {dj_dw:0.3e}, dj_db: {dj_db:0.3e}",
-                  f"w: {w_init:0.3e}, b: {b_init:0.3e}")
-    return w_init, b_init, parameter_history, cost_history
+                  f"w: {w:0.3e}, b: {b:0.3e}")
+    return w, b, parameter_history, cost_history
 
 
